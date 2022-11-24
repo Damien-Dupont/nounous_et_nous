@@ -1,5 +1,5 @@
 changements apportés par les nouvelles versions du code:
-la branche git eest précisée lorsqu'elle ne correspond pas précisément au numéro de version
+la branche git est précisée lorsqu'elle ne correspond pas précisément au numéro de version
 
 ## V.0.0
 
