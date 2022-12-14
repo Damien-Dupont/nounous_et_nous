@@ -14,9 +14,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "downlevelIteration": true,
     "jsx": "react-jsx"
-  }
-  // "include": [
-  //   "src"
-  // ]
+  },
+  "include": ["file.ts"],
+  "exclude": ["src", "node_modules"]
 }
