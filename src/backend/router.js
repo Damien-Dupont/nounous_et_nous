@@ -16,7 +16,7 @@ const {
   JobController,
   PromotionController,
   MasterController,
-} = require("./controllers");
+} = require("../controllers");
 
 const router = express.Router();
 
