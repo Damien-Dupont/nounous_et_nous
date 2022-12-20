@@ -16,29 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `child`
+-- Table structure for table `kid`
 --
 
-DROP TABLE IF EXISTS `child`;
+DROP TABLE IF EXISTS `kid`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `child` (
-  `idKid` int NOT NULL AUTO_INCREMENT,
-  `nom` varchar(45) NOT NULL,
-  `prenom` varchar(45) NOT NULL,
+CREATE TABLE `kid` (
+  `id_kid` int NOT NULL AUTO_INCREMENT,
+  `kid_lastname` varchar(45) NOT NULL,
+  `kid_firstname` varchar(45) NOT NULL,
   `birthdate` date NOT NULL,
-  PRIMARY KEY (`idKid`)
+  PRIMARY KEY (`id_kid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `child`
+-- Dumping data for table `kid`
 --
 
-LOCK TABLES `child` WRITE;
-/*!40000 ALTER TABLE `child` DISABLE KEYS */;
-INSERT INTO `child` VALUES (1,'D','Margot','2020-10-18');
-/*!40000 ALTER TABLE `child` ENABLE KEYS */;
+LOCK TABLES `kid` WRITE;
+/*!40000 ALTER TABLE `kid` DISABLE KEYS */;
+INSERT INTO `kid` VALUES (1,'D','Margot','2020-10-18');
+/*!40000 ALTER TABLE `kid` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -239,7 +239,7 @@ CREATE TABLE `userContract` (
   KEY `id_user_idx` (`id_user`),
   KEY `id_contract_idx` (`id_contract`),
   CONSTRAINT `id_contract` FOREIGN KEY (`id_contract`) REFERENCES `Contract` (`idContract`),
-  CONSTRAINT `id_kid` FOREIGN KEY (`id_kid`) REFERENCES `child` (`idKid`),
+  CONSTRAINT `id_kid` FOREIGN KEY (`id_kid`) REFERENCES `kid` (`id_kid`),
   CONSTRAINT `id_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`idUser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
