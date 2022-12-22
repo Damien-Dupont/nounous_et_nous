@@ -33,9 +33,9 @@ class VersionManager extends AbstractManager {
       .then((res) => res[0]);
   }
 
-  delete(kid) {
+  delete(version) {
     return this.connection.query(`DELETE FROM ${this.table} WHERE id = ?`, [
-      kid.id,
+      version.id,
     ]);
   }
 }

@@ -1,26 +1,20 @@
 const AbstractManager = require("./AbstractManager");
 
-class VersionManager extends AbstractManager {
-  static table = "version";
+class DurationsManager extends AbstractManager {
+  static table = "durations";
 
-  insert(contract, starting_date, durations_id, prices_id) {
-    console.log(
-      "VersionManager",
-      contract.id,
-      starting_date,
-      durations_id,
-      prices_id
-    );
+  insert(weeks_per_year, weeks_per_cycle, cycle_id) {
+    console.log("DurationsManager", weeks_per_year, weeks_per_cycle, cycle_id);
     return this.connection.query(
-      `insert into ${this.table} (contract_id, starting_date, durations_id, prices_id) values (?, ?, ?, ?)`,
-      [contract.id, starting_date, durations_id, prices_id]
+      `insert into ${this.table} (weeks_per_year, weeks_per_cycle, cycle_id) values (?, ?, ?)`,
+      [weeks_per_year, weeks_per_cycle, cycle_id]
     );
   }
 
-  update(contract, starting_date, durations_id, prices_id, regulation) {
+  update(durations, weeks_per_year, weeks_per_cycle, cycle_id) {
     return this.connection.query(
-      `update ${this.table} set starting_date = ?, durations_id = ?, prices_id = ?, regulation_at_end, where id = ?`,
-      [starting_date, durations_id, prices_id, regulation, contract.id]
+      `update ${this.table} set weeks_per_year = ?, weeks_per_cycle = ?, cycle_id, where id = ?`,
+      [weeks_per_year, weeks_per_cycle, cycle_id, durations.id]
     );
   }
 
@@ -40,4 +34,4 @@ class VersionManager extends AbstractManager {
   }
 }
 
-module.exports = VersionManager;
+module.exports = DurationsManager;
