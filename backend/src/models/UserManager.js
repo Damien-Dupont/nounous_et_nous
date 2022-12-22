@@ -6,14 +6,14 @@ class UserManager extends AbstractManager {
   insert(lastname, firstname, role) {
     console.log("UserManager", lastname, firstname, role);
     return this.connection.query(
-      `insert into ${UserManager.table} (lastname, firstname, role) values (?, ?, ?)`,
+      `insert into ${this.table} (lastname, firstname, role) values (?, ?, ?)`,
       [lastname, firstname, role]
     );
   }
 
   update(user) {
     return this.connection.query(
-      `update ${UserManager.table} set lastname = ? where id = ?`,
+      `update ${this.table} set lastname = ? where id = ?`,
       [user.lastname, user.id]
     );
   }
@@ -21,17 +21,16 @@ class UserManager extends AbstractManager {
   findbyName(name) {
     return this.connection
       .query(
-        `select * from ${UserManager.table} where (lastname = ? OR firstname = ?)`,
+        `select * from ${this.table} where (lastname = ? OR firstname = ?)`,
         [name, name]
       )
       .then((res) => res[0]);
   }
 
   delete(user) {
-    return this.connection.query(
-      `DELETE FROM ${UserManager.table} WHERE id = ?`,
-      [user]
-    );
+    return this.connection.query(`DELETE FROM ${this.table} WHERE id = ?`, [
+      user.id,
+    ]);
   }
 }
 

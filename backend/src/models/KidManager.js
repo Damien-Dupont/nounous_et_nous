@@ -6,14 +6,14 @@ class KidManager extends AbstractManager {
   insert(lastname, firstname, birthdate) {
     console.log("KidManager", lastname, firstname, birthdate);
     return this.connection.query(
-      `insert into ${KidManager.table} (lastname, firstname, birthdate) values (?, ?, ?)`,
+      `insert into ${this.table} (lastname, firstname, birthdate) values (?, ?, ?)`,
       [lastname, firstname, birthdate]
     );
   }
 
   update(kid, birthdate, firstname, lastname) {
     return this.connection.query(
-      `update ${KidManager.table} set lastname = ?, firstname = ?, birthdate = ? where id = ?`,
+      `update ${this.table} set lastname = ?, firstname = ?, birthdate = ? where id = ?`,
       [lastname, firstname, birthdate, kid.id]
     );
   }
@@ -21,17 +21,16 @@ class KidManager extends AbstractManager {
   findbyName(name) {
     return this.connection
       .query(
-        `select * from ${KidManager.table} where (lastname = ? OR firstname = ?)`,
+        `select * from ${this.table} as where (lastname = ? OR firstname = ?)`,
         [name, name]
       )
       .then((res) => res[0]);
   }
 
   delete(kid) {
-    return this.connection.query(
-      `DELETE FROM ${KidManager.table} WHERE id = ?`,
-      [kid]
-    );
+    return this.connection.query(`DELETE FROM ${this.table} WHERE id = ?`, [
+      kid.id,
+    ]);
   }
 }
 

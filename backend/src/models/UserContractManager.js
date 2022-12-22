@@ -13,7 +13,7 @@ class UserContractManager extends AbstractManager {
       is_main
     );
     return this.connection.query(
-      `insert into ${UserContractManager.table} (contract.id, user.id, kid.id, is_main) values (?, ?, ?, ?)`,
+      `insert into ${this.table} (contract.id, user.id, kid.id, is_main) values (?, ?, ?, ?)`,
       [contract.id, user.id, kid.id, is_main]
     );
   }
@@ -33,24 +33,41 @@ class UserContractManager extends AbstractManager {
 
   update(contract, user, kid, is_main) {
     return this.connection.query(
-      `update ${UserContractManager.table} set is_main = ?, user = ?, kid = ? where id = ?`,
+      `update ${this.table} set is_main = ?, user = ?, kid = ? where id = ?`,
       [is_main, user.id, kid.id, contract.id]
     );
   }
 
-  findbyId(user_or_kid) {
+  // findbykid(kid) {
+  //   return this.connection
+  //     .query(`select * from ${this.table} where id = ?`, [
+  //       kid.id,
+  //     ])
+  //     .then((res) => res[0]);
+  // }
+
+  findbyKid(kid) {
     return this.connection
-      .query(`select * from ${UserContractManager.table} where id = ?`, [
-        user_or_kid.id,
-      ])
+      .query(
+        `select * from ${this.table} as UC INNER JOIN kid as K ON kid_id = id_kid where INNER JOIN user as U ON user_id = id_user where id_kid = ?`,
+        [kid.id]
+      )
+      .then((res) => res[0]);
+  }
+
+  findbyUser(user) {
+    return this.connection
+      .query(
+        `select * from ${this.table} as UC INNER JOIN kid as K ON kid_id = id_kid where INNER JOIN user as U ON user_id = id_user where user_id = ?`,
+        [user.id]
+      )
       .then((res) => res[0]);
   }
 
   delete(contract) {
-    return this.connection.query(
-      `DELETE FROM ${UserContractManager.table} WHERE id = ?`,
-      [contract.id]
-    );
+    return this.connection.query(`DELETE FROM ${this.table} WHERE id = ?`, [
+      contract.id,
+    ]);
   }
 }
 
