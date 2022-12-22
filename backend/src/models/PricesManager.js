@@ -34,7 +34,7 @@ class PricesManager extends AbstractManager {
   }
 
   update(
-    durations,
+    prices,
     price_hour,
     price_household,
     price_long_household,
@@ -51,22 +51,20 @@ class PricesManager extends AbstractManager {
         price_meal,
         price_snack,
         price_over_hour,
-        durations.id,
+        prices.id,
       ]
     );
   }
 
-  findbyId(durations) {
+  findbyId(prices) {
     return this.connection
-      .query(`select * from ${this.table} where id_durations = ?`, [
-        durations.id,
-      ])
+      .query(`select * from ${this.table} where id_prices = ?`, [prices.id])
       .then((res) => res[0]);
   }
 
-  delete(durations) {
+  delete(prices) {
     return this.connection.query(`DELETE FROM ${this.table} WHERE id = ?`, [
-      durations.id,
+      prices.id,
     ]);
   }
 }
