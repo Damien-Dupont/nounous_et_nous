@@ -21,7 +21,7 @@ class UserManager extends AbstractManager {
   findbyName(name) {
     return this.connection
       .query(
-        `select * from ${UserManager.table} where (lastname = ? OR firdtname = ?)`,
+        `select * from ${UserManager.table} where (lastname = ? OR firstname = ?)`,
         [name, name]
       )
       .then((res) => res[0]);
