@@ -18,18 +18,17 @@ class DurationsManager extends AbstractManager {
     );
   }
 
-  findbyName(name) {
+  findbyId(durations) {
     return this.connection
-      .query(
-        `select * from ${this.table} where (lastname = ? OR firstname = ?)`,
-        [name, name]
-      )
+      .query(`select * from ${this.table} where id_durations = ?`, [
+        durations.id,
+      ])
       .then((res) => res[0]);
   }
 
-  delete(kid) {
+  delete(durations) {
     return this.connection.query(`DELETE FROM ${this.table} WHERE id = ?`, [
-      kid.id,
+      durations.id,
     ]);
   }
 }
