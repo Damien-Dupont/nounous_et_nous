@@ -25,17 +25,17 @@ class ContractManager extends AbstractManager {
     );
   }
 
-  findbyId(contract) {
-    return this.connection
-      .query(`select * from ${this.table} where id = ?`, [contract.id])
-      .then((res) => res[0]);
-  }
+  // findbyId(contract) {
+  //   return this.connection
+  //     .query(`select * from ${this.table} where id = ?`, [contract.id])
+  //     .then((res) => res[0]);
+  // }
 
-  delete(contract) {
-    return this.connection.query(`DELETE FROM ${this.table} WHERE id = ?`, [
-      contract.id,
-    ]);
-  }
+  // delete(contract) {
+  //   return this.connection.query(`DELETE FROM ${this.table} WHERE id = ?`, [
+  //     contract.id,
+  //   ]);
+  // }
 }
 
 module.exports = ContractManager;
