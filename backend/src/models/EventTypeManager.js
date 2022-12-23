@@ -3,34 +3,25 @@ const AbstractManager = require("./AbstractManager");
 class EventTypeManager extends AbstractManager {
   static table = "event_type";
 
-  insert(contract_id, event_type_id, starting_date, ending_date) {
-    const creation_date = new Date().toLocaleDateString();
-    console.log(
-      "EventTypeManager",
-      contract_id,
-      event_type_id,
-      starting_date,
-      ending_date,
-      creation_date
-    );
+  insert(id_event_type, type, unit, is_paid) {
+    console.log("EventTypeManager", id_event_type, type, unit, is_paid);
     return this.connection.query(
-      `insert into ${this.table} (contract_id, event_type_id, starting_date, ending_date, creation_date) values (?, ?, ?, ?, ?)`,
-      [contract_id, event_type_id, starting_date, ending_date, creation_date]
+      `insert into ${this.table} (id_event_type, type, unit, is_paid) values (?, ?, ?, ?, ?)`,
+      [id_event_type, type, unit, is_paid]
     );
   }
 
-  update(contract_id, event_type_id, starting_date, ending_date) {
-    const creation_date = new Date().toLocaleDateString();
+  update(id_event_type, type, unit, is_paid) {
     return this.connection.query(
-      `update ${this.table} set ending_date = ?, starting_date = ?, event_type_id = ?, creation_date =?, where id = ?`,
-      [ending_date, starting_date, event_type_id, creation_date, contract_id]
+      `update ${this.table} set is_paid = ?, unit = ?, type = ?, creation_date =?, where id = ?`,
+      [is_paid, unit, type, id_event_type]
     );
   }
 
-  findbyContract(contract_id) {
+  findbyEventType(id_event_type) {
     return this.connection
-      .query(`select * from ${this.table} as where contract_id = ?`, [
-        contract_id,
+      .query(`select * from ${this.table} as where id_event_type = ?`, [
+        id_event_type,
       ])
       .then((res) => res[0]);
   }

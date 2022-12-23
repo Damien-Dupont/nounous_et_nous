@@ -35,6 +35,15 @@ class EventManager extends AbstractManager {
       .then((res) => res[0]);
   }
 
+  findbyEventType(id_event_type, contract_id) {
+    return this.connection
+      .query(
+        `select * from ${this.table} as where event_type_id = ? AND contract_id =?`,
+        [id_event_type, contract_id]
+      )
+      .then((res) => res[0]);
+  }
+
   findbyContractBetween(contract_id, date_open, date_close) {
     return this.connection
       .query(
