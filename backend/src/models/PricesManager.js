@@ -62,6 +62,19 @@ class PricesManager extends AbstractManager {
       .then((res) => res[0]);
   }
 
+  findCurrentPricing(contract_id, date) {
+    return this.connection
+      .query(
+        `SELECT price_hour, price_household, price_long_household, price_meal, price_snack, price_over_hour from ${this.table} as P
+        INNER JOIN version as V ON V.prices_id = P.id_prices
+        WHERE V.contract_id = ? AND V.starting_date <= ?
+        ORDER BY V.starting_date DESC
+        LIMIT 1`,
+        [contract_id, date]
+      )
+      .then((res) => res[0]);
+  }
+
   delete(prices) {
     return this.connection.query(`DELETE FROM ${this.table} WHERE id = ?`, [
       prices.id,
